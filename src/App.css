@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url('images/taylor-van-riper-yQorCngxzwI-unsplash.jpg');
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+}
