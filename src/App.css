@@ -2,7 +2,56 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-image: url('images/taylor-van-riper-yQorCngxzwI-unsplash.jpg');
+  background-image: url("images/valentin-muller-bWtd1ZyEy6w-unsplash.jpg");
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
+  color: #fff;
+}
+
+.App {
+  max-width: 650px;
+  height: 700px;
+  margin: auto;
+  margin-top: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
+input {
+  width: 40%;
+  height: 23px;
+  border-radius: 10px;
+  padding: 3px 0;
+  font-size: 17px;
+  background: rgba(150, 135, 135, 0.1);
+  color: #fff;
+  border: 1px solid #8b8888;
+}
+
+::placeholder {
+  color:rgb(206, 184, 184);
+}
+
+.city-name {
+  padding-top: 50%;
+  padding-right: 50%;
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.temp {
+  font-size: 40px;
+  padding-right: 50%;
+  font-weight: bold;
 }

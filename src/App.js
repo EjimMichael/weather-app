@@ -38,20 +38,23 @@ function App() {
     // });
   } 
 
-  
-
   return (
     <div className="App">
-      <h1>Weather App</h1>
-      <p>{getWeather.name}</p>
-      {getWeather.main ? <p>{getWeather.main.temp}</p> : null}
+      <div className="container">
+        <h1>Weather App</h1>
+        <div className="search">
+          <input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            onKeyPress={searchLocation}
+            placeholder={'Search city'}
+          />
+        </div>
 
-      <div className="search">
-        <input 
-          value={location}
-          onChange={e => setLocation(e.target.value)}
-          onKeyPress={searchLocation}
-        />
+        <p className="city-name">{getWeather.name}</p>
+        {getWeather.main ? (
+          <p className="temp">{getWeather.main.temp}°C</p>
+        ) : null}
       </div>
     </div>
   );
