@@ -21,7 +21,6 @@ function App() {
     axiosCall(endPoint)
     .then(res => {
       setLocation(res.data);
-      console.log(res.data);
     })
   }, [axiosCall, endPoint]);
 
@@ -40,7 +39,6 @@ function App() {
     if (e.key === "Enter") {
       axiosCall(cityAPI).then((res) => {
         setCity(res.data);
-        console.log(res.data);
         setCity("");
         setLocation(res.data);
       });
@@ -63,8 +61,14 @@ function App() {
 
         <p className="city-name">{location.name}</p>
         {location.main && <p className="temp">{location.main.temp}°C</p>}
-        {location.weather && <p className="main">{location.weather[0].main}</p>}
-        {location.main && <p className="temp">{location.main.humidity}%</p>}
+        <div className="right">
+          {location.weather && (
+            <div className="main">{location.weather[0].main}</div>
+          )}
+          {location.main && (
+            <div className="humidity">{location.main.humidity}%</div>
+          )}
+        </div>
       </div>
     </div>
   );
