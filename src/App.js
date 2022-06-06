@@ -3,32 +3,46 @@ import { useState, useEffect } from "react";
 import useFetch from "./useFetch";
 
 function App() {
-  const dellons = useFetch;
-  const [weather, setWeather] = useState("");
+  const axiosCall = useFetch;
+  const key = "fe5c3162eedad38f3e3ba54da2b43a04";
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [location, setLocation] = useState("");
+  const [city, setCity] = useState("");
 
-  const endPoint =
-    "https://api.openweathermap.org/data/2.5/weather?lat=4.8472226&lon=6.974604&appid=fe5c3162eedad38f3e3ba54da2b43a04";
-  const city = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=fe5c3162eedad38f3e3ba54da2b43a04`;
-  //   const key = "fe5c3162eedad38f3e3ba54da2b43a04";
-  
+  const endPoint = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`;
+  const cityAPI = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe5c3162eedad38f3e3ba54da2b43a04&units=metric`;
+
   useEffect(() => {
-    dellons(endPoint)
-      .then((res) => {
-        setWeather(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [dellons]);
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
+    axiosCall(endPoint)
+    .then(res => {
+      setLocation(res.data);
+      console.log(res.data);
+    })
+  }, [axiosCall, endPoint]);
 
-  const searchLocation = (e) => {
+  // useEffect(() => {
+  //   axiosCall(endPoint)
+  //     .then((res) => {
+  //       setLocation(res.data);
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [axiosCall]);
+
+  const searchCity = (e) => {
     if (e.key === "Enter") {
-      dellons(city).then((res) => {
+      axiosCall(cityAPI).then((res) => {
+        setCity(res.data);
+        console.log(res.data);
+        setCity("");
         setLocation(res.data);
-        setLocation("");
-        setWeather(res.data);
       });
     }
   };
@@ -39,16 +53,18 @@ function App() {
         <h1>Weather App</h1>
         <div className="search">
           <input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            onKeyPress={searchLocation}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            onKeyPress={searchCity}
             placeholder="Search city"
             type="text"
           />
         </div>
 
-        <p className="city-name">{weather.name}</p>
-        {weather.main && <p className="temp">{weather.main.temp}°C</p>}
+        <p className="city-name">{location.name}</p>
+        {location.main && <p className="temp">{location.main.temp}°C</p>}
+        {location.weather && <p className="main">{location.weather[0].main}</p>}
+        {location.main && <p className="temp">{location.main.humidity}%</p>}
       </div>
     </div>
   );
