@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import useFetch from "./useFetch";
+import SearchIcon from '@mui/icons-material/Search';
 
 function App() {
   const axiosCall = useFetch;
@@ -9,8 +10,9 @@ function App() {
   const [longitude, setLongitude] = useState("");
   const [location, setLocation] = useState("");
   const [city, setCity] = useState("");
+  // `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`
 
-  const endPoint = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`;
+  const endPoint = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`;
   const cityAPI = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe5c3162eedad38f3e3ba54da2b43a04&units=metric`;
 
   useEffect(() => {
@@ -19,9 +21,12 @@ function App() {
       setLongitude(position.coords.longitude);
     });
     axiosCall(endPoint)
-    .then(res => {
-      setLocation(res.data);
-    })
+      .then((res) => {
+        setLocation(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [axiosCall, endPoint]);
 
   // useEffect(() => {
@@ -57,11 +62,14 @@ function App() {
             placeholder="Search city"
             type="text"
           />
+          <SearchIcon className="searchicon" />
         </div>
 
-        <p className="city-name">{location.name}</p>
-        {location.main && <p className="temp">{location.main.temp}°C</p>}
-        <div className="right">
+        <div className="top">
+          <div className="city-name">{location.name}</div>
+          {location.main && <div className="temp">{location.main.temp}°C</div>}
+        </div>
+        <div className="bottom">
           {location.weather && (
             <div className="main">{location.weather[0].main}</div>
           )}
