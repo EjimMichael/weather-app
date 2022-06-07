@@ -73,7 +73,7 @@ input {
 
 .bottom {
   display: flex;
-  margin-top: 25%;
+  margin-top: 17%;
 }
 
 .main {
@@ -84,4 +84,8 @@ input {
 .humidity {
   font-size: 35px;
   margin-left: 50%;
+}
+
+.error {
+  font-size: 35px;
 }

@@ -10,6 +10,7 @@ function App() {
   const weather = GeoLocation(); 
   const [location, setLocation] = useState("");
   const [city, setCity] = useState("");
+  const [error, setError] = useState('');
 
   const endPoint = `http://api.openweathermap.org/data/2.5/weather?lat=${weather.coordinates.lat}&lon=${weather.coordinates.lng}&appid=${key}&units=metric`;
   const cityAPI = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe5c3162eedad38f3e3ba54da2b43a04&units=metric`;
@@ -28,6 +29,10 @@ function App() {
         setCity(res.data);
         setCity("");
         setLocation(res.data);
+      }).catch(err => {
+        setError(err.response.data.message);
+        setLocation(error);
+        setCity("");
       });
     }
   };
@@ -51,6 +56,8 @@ function App() {
           <div className="city-name">{location.name}</div>
           {location.main && <div className="temp">{location.main.temp}°C</div>}
         </div>
+        <div className="error">{error}</div>
+
         <div className="bottom">
           {location.weather && (
             <div className="main">{location.weather[0].main}</div>
