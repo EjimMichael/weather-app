@@ -19,7 +19,7 @@ body {
   margin-top: 5px;
   border: 1px solid rgba(128, 128, 128, 0.349);
   border-radius: 5px;
-  box-shadow: 10px 10px 5px 0px c;
+  box-shadow: 11px 11px 0px 0px rgba(0,0,0,0.75) inset;
 }
 
 .container {
@@ -45,9 +45,9 @@ input {
   border: 3px solid #555;
 }
 
-.searchicon {
-  margin-top: auto;
-}
+/* .searchicon {
+  height: 20px;
+} */
 
 ::placeholder {
   color:rgb(206, 184, 184);

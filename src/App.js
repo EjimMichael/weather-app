@@ -2,43 +2,25 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import useFetch from "./useFetch";
 import SearchIcon from '@mui/icons-material/Search';
+import GeoLocation from "./GeoLocation";
 
 function App() {
   const axiosCall = useFetch;
   const key = "fe5c3162eedad38f3e3ba54da2b43a04";
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const weather = GeoLocation(); 
   const [location, setLocation] = useState("");
   const [city, setCity] = useState("");
-  // `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`
 
-  const endPoint = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`;
+  const endPoint = `http://api.openweathermap.org/data/2.5/weather?lat=${weather.coordinates.lat}&lon=${weather.coordinates.lng}&appid=${key}&units=metric`;
   const cityAPI = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe5c3162eedad38f3e3ba54da2b43a04&units=metric`;
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    });
-    axiosCall(endPoint)
-      .then((res) => {
-        setLocation(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [axiosCall, endPoint]);
+    useEffect(() => {
+      weather.loaded &&
+        axiosCall(endPoint).then((res) => {
+          setLocation(res.data);
+        }); 
+    }, [axiosCall, endPoint, weather.loaded])
 
-  // useEffect(() => {
-  //   axiosCall(endPoint)
-  //     .then((res) => {
-  //       setLocation(res.data);
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [axiosCall]);
 
   const searchCity = (e) => {
     if (e.key === "Enter") {
@@ -62,7 +44,7 @@ function App() {
             placeholder="Search city"
             type="text"
           />
-          <SearchIcon className="searchicon" />
+          <SearchIcon />
         </div>
 
         <div className="top">
