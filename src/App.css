@@ -34,23 +34,33 @@ h1 {
   font-size: 45px;
 }
 
-input {
-  width: 40%;
-  height: 25px;
-  border-radius: 10px;
-  padding: 3px 0;
-  font-size: 17px;
-  background: rgba(150, 135, 135, 0.1);
-  color: #fff;
-  border: 3px solid #555;
+.search {
+  width: 320px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin: auto;
 }
 
-/* .searchicon {
-  height: 20px;
-} */
+input {
+  flex: 1;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.search-icon {
+  font-size: 20px;
+  color: #777;
+}
 
 ::placeholder {
-  color:rgb(206, 184, 184);
+  color: #000000bb;
 }
 
 .top {
@@ -73,7 +83,7 @@ input {
 
 .bottom {
   display: flex;
-  margin-top: 17%;
+  margin-top: 15%;
 }
 
 .main {

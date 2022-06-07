@@ -42,14 +42,14 @@ function App() {
       <div className="container">
         <h1>Weather App</h1>
         <div className="search">
+          <SearchIcon className="search-icon" />
           <input
             value={city}
             onChange={(e) => setCity(e.target.value)}
             onKeyPress={searchCity}
-            placeholder="Search city"
+            placeholder="Search city..."
             type="text"
           />
-          <SearchIcon />
         </div>
 
         <div className="top">
