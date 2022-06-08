@@ -6,14 +6,14 @@ import GeoLocation from "./GeoLocation";
 
 function App() {
   const axiosCall = useFetch;
-  const key = "fe5c3162eedad38f3e3ba54da2b43a04";
+  const key = process.env.REACT_APP_API_KEY;
   const weather = GeoLocation(); 
   const [location, setLocation] = useState("");
   const [city, setCity] = useState("");
   const [error, setError] = useState('');
 
   const endPoint = `http://api.openweathermap.org/data/2.5/weather?lat=${weather.coordinates.lat}&lon=${weather.coordinates.lng}&appid=${key}&units=metric`;
-  const cityAPI = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe5c3162eedad38f3e3ba54da2b43a04&units=metric`;
+  const cityAPI = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
 
     useEffect(() => {
       weather.loaded &&
